@@ -1,5 +1,5 @@
 "use client";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import dynamic from "next/dynamic";
@@ -115,8 +115,9 @@ export default function Hero() {
 
         <motion.div {...fadeUp(0.7)} className="flex gap-5">
           {[
-            { icon: Github, href: "https://github.com/", label: "GitHub" },
-            { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
+            { icon: Github, href: "https://github.com/ankit79600", label: "GitHub" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/ankitpatel79600/", label: "LinkedIn" },
+            { icon: Twitter, href: "https://x.com/ankit_pate33282", label: "Twitter / X" },
             { icon: Mail, href: "mailto:udemygenalpha@gmail.com", label: "Email" },
           ].map(({ icon: Icon, href, label }) => (
             <a

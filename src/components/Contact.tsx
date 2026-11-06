@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Github, Linkedin, Mail, Send } from "lucide-react";
+import { Github, Linkedin, Mail, Send, Twitter } from "lucide-react";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -136,14 +136,20 @@ export default function Contact() {
               {
                 icon: Github,
                 label: "GitHub",
-                value: "github.com/ankitpatel",
-                href: "https://github.com/",
+                value: "github.com/ankit79600",
+                href: "https://github.com/ankit79600",
               },
               {
                 icon: Linkedin,
                 label: "LinkedIn",
-                value: "linkedin.com/in/ankitpatel",
-                href: "https://linkedin.com/",
+                value: "linkedin.com/in/ankitpatel79600",
+                href: "https://www.linkedin.com/in/ankitpatel79600/",
+              },
+              {
+                icon: Twitter,
+                label: "Twitter / X",
+                value: "x.com/ankit_pate33282",
+                href: "https://x.com/ankit_pate33282",
               },
             ].map(({ icon: Icon, label, value, href }) => (
               <a
