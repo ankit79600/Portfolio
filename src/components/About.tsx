@@ -130,7 +130,7 @@ export default function About() {
                   fill
                   priority
                   className="object-cover"
-                  style={{ objectPosition: "50% 75%" }}
+                  style={{ objectPosition: "50% 90%" }}
                 />
               </div>
             </div>
