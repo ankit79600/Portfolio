@@ -6,57 +6,57 @@ import { useTilt } from "@/hooks/useTilt";
 const projects = [
   {
     num: "01",
-    title: "Project One",
+    title: "Oracle XI",
     description:
-      "Full-stack web app with real-time updates, authentication, and a clean dashboard UI. Built for scale with PostgreSQL and SSR.",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind"],
-    github: "#",
-    live: "#",
+      "AI-powered football prediction platform with pay-per-call micropayments settled on the Injective blockchain in ~650ms. Claude AI analyzes live World Cup data with tiered pricing — Haiku for quick picks, Opus for deep analysis.",
+    tags: ["Node.js", "Claude AI", "Injective", "MCP Protocol", "TypeScript"],
+    github: "https://github.com/ankit79600/Oracle-XI",
+    live: null,
   },
   {
     num: "02",
-    title: "Project Two",
+    title: "MediQueue",
     description:
-      "REST API handling 10k+ requests/day with rate limiting, Redis caching, and 95% test coverage. Zero downtime deploys.",
-    tags: ["Node.js", "Express", "Redis", "Jest"],
-    github: "#",
-    live: "#",
+      "Real-time OPD queue & appointment system built at a hackathon. Patients get digital tokens with QR codes and live position updates via Socket.IO. Staff manage queues with role-based controls; admins see live KPI dashboards.",
+    tags: ["React", "Node.js", "Socket.IO", "PostgreSQL", "Prisma", "Docker"],
+    github: "https://github.com/ankit79600/Mediqueue",
+    live: null,
   },
   {
     num: "03",
-    title: "Project Three",
+    title: "VOUCH",
     description:
-      "Mobile-first e-commerce UI with cart, search, and Stripe checkout. 95+ Lighthouse score across all metrics.",
-    tags: ["React", "Vite", "Zustand", "Stripe"],
-    github: "#",
-    live: "#",
+      "Zero-knowledge proof review system on the Midnight blockchain. Proves a reviewer actually purchased a product without revealing their identity — Merkle trees and ZK circuits keep all credentials client-side only.",
+    tags: ["React", "TypeScript", "Midnight", "ZK Proofs", "Vercel"],
+    github: "https://github.com/ankit79600/VOUCH",
+    live: null,
   },
   {
     num: "04",
-    title: "Project Four",
+    title: "Night-Ballot",
     description:
-      "CLI toolkit for automating repetitive dev tasks. Published on npm, 500+ weekly downloads, fully typed.",
-    tags: ["Node.js", "Commander.js", "npm"],
-    github: "#",
+      "Privacy-preserving on-chain voting with zero-knowledge proofs on Midnight testnet. Voter identities never appear on-chain — only aggregate tallies are public. Includes real-time polling, vote receipts, and downloadable audit trails.",
+    tags: ["React", "Compact", "Midnight", "ZK Proofs", "Vite"],
+    github: "https://github.com/ankit79600/Night-Ballot",
     live: null,
   },
   {
     num: "05",
-    title: "Project Five",
+    title: "Alumni Connect Hub",
     description:
-      "Real-time collaborative whiteboard using WebSockets. Multi-user sessions, cursors, and undo/redo history.",
-    tags: ["Socket.io", "Canvas API", "React", "Fastify"],
-    github: "#",
-    live: "#",
+      "Student-alumni networking platform with Google OAuth and Supabase backend. Alumni post jobs, internships, and events; students discover mentors via a Google Maps-powered global alumni directory.",
+    tags: ["React", "TypeScript", "Supabase", "Tailwind CSS", "Google OAuth"],
+    github: "https://github.com/ankit79600/alumni-connect-hub",
+    live: null,
   },
   {
     num: "06",
-    title: "Project Six",
+    title: "Quizchain",
     description:
-      "Open-source component library — 30+ accessible React components, Storybook docs, fully typed with Radix UI.",
-    tags: ["React", "TypeScript", "Storybook", "Radix UI"],
-    github: "#",
-    live: "#",
+      "On-chain quiz system deployed on Celo Sepolia testnet. Smart contract stores and verifies quiz answers immutably on-chain, with transactions confirmed in under one second and fully auditable on Celo Blockscout.",
+    tags: ["Solidity", "Celo", "Smart Contracts", "Remix IDE", "MetaMask"],
+    github: "https://github.com/ankit79600/Quizchain",
+    live: null,
   },
 ];
 
@@ -169,7 +169,7 @@ export default function Projects() {
           Things I&apos;ve Built
         </h2>
         <p className="font-body text-fg-muted max-w-md leading-relaxed">
-          A selection of projects I&apos;ve shipped — each one taught me something new.
+          A selection of projects I&apos;ve shipped — spanning AI, blockchain, and full-stack web.
         </p>
       </motion.div>
 
