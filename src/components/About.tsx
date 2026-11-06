@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Briefcase, Code2, Download } from "lucide-react";
 
@@ -95,23 +96,50 @@ export default function About() {
         >
           {/* Avatar card */}
           <div
-            className="col-span-2 bg-[#0A0A0A] border border-white/[0.06] rounded-2xl
-              p-8 flex items-center justify-center relative overflow-hidden"
-            style={{ minHeight: 200 }}
+            className="col-span-2 relative overflow-hidden rounded-2xl border border-white/[0.06]"
+            style={{ minHeight: 360 }}
           >
+            <Image
+              src="/avatar.png"
+              alt="Ankit Patel"
+              fill
+              priority
+              className="object-cover object-top"
+            />
+            {/* Green arc glow matching the portfolio accent */}
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle at 50% 50%, rgba(0,230,118,0.06) 0%, transparent 70%)",
+                  "radial-gradient(ellipse at 65% 15%, rgba(0,230,118,0.13) 0%, transparent 55%)",
+                mixBlendMode: "overlay",
               }}
             />
-            <p
-              className="font-display font-bold text-8xl text-accent relative z-10"
-              style={{ textShadow: "0 0 60px rgba(0,230,118,0.5)" }}
-            >
-              AP
-            </p>
+            {/* Bottom fade into card */}
+            <div
+              className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 60%, transparent 100%)",
+              }}
+            />
+            {/* Floating name tag */}
+            <div className="absolute bottom-5 left-5 z-10">
+              <p className="font-display font-bold text-white text-xl leading-tight">
+                Ankit Patel
+              </p>
+              <p className="font-heading text-[10px] tracking-[0.3em] text-accent mt-1">
+                FULL-STACK DEVELOPER
+              </p>
+            </div>
+            {/* Top-right status dot */}
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+              </span>
+              <span className="font-heading text-[9px] tracking-widest text-accent">AVAILABLE</span>
+            </div>
           </div>
 
           {/* Stat cards */}
