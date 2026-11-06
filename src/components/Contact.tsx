@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Github, Linkedin, Mail, Send, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const socials = [
   { icon: Mail, label: "Email", value: "ankitpatel79600@gmail.com", href: "mailto:ankitpatel79600@gmail.com" },
@@ -21,18 +22,25 @@ const sectionAnim = {
 };
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
-  };
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formRef.current) return;
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+      setStatus("sent");
+      formRef.current.reset();
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -61,6 +69,7 @@ export default function Contact() {
       <div className="grid lg:grid-cols-2 gap-12">
         {/* Form */}
         <motion.form
+          ref={formRef}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -73,35 +82,44 @@ export default function Contact() {
             <label htmlFor="name" className="block font-heading text-[10px] tracking-widest text-fg-dim mb-2">
               NAME <span className="text-accent">*</span>
             </label>
-            <input id="name" name="name" type="text" required placeholder="Your name"
-              value={form.name} onChange={handleChange} className={inputClass} />
+            <input
+              id="name" name="user_name" type="text" required placeholder="Your name"
+              className={inputClass}
+            />
           </div>
           <div>
             <label htmlFor="email" className="block font-heading text-[10px] tracking-widest text-fg-dim mb-2">
               EMAIL <span className="text-accent">*</span>
             </label>
-            <input id="email" name="email" type="email" required placeholder="your@email.com"
-              value={form.email} onChange={handleChange} className={inputClass} />
+            <input
+              id="email" name="user_email" type="email" required placeholder="your@email.com"
+              className={inputClass}
+            />
           </div>
           <div>
             <label htmlFor="message" className="block font-heading text-[10px] tracking-widest text-fg-dim mb-2">
               MESSAGE <span className="text-accent">*</span>
             </label>
-            <textarea id="message" name="message" required rows={5} placeholder="Tell me about your project..."
-              value={form.message} onChange={handleChange}
-              className={`${inputClass} resize-none`} />
+            <textarea
+              id="message" name="message" required rows={5} placeholder="Tell me about your project..."
+              className={`${inputClass} resize-none`}
+            />
           </div>
 
           <button
             type="submit"
-            disabled={status !== "idle"}
+            disabled={status === "sending" || status === "sent"}
             className="flex items-center gap-2.5 font-heading text-xs tracking-widest
               px-7 py-4 bg-accent text-background font-bold rounded-xl
               hover:bg-accent-dark hover:shadow-[0_0_30px_rgba(0,230,118,0.3)]
               disabled:opacity-50 disabled:cursor-not-allowed
               transition-all duration-200 cursor-pointer"
           >
-            {status === "sending" ? "SENDING..." : status === "sent" ? "MESSAGE SENT ✓" : (
+            {status === "sending" ? (
+              "SENDING..."
+            ) : status === "sent" ? (
+              "MESSAGE SENT ✓"
+            ) : (
               <><Send size={14} /> SEND MESSAGE</>
             )}
           </button>
@@ -109,6 +127,11 @@ export default function Contact() {
           {status === "sent" && (
             <p role="status" className="font-heading text-xs text-accent tracking-wider">
               Thanks! I&apos;ll get back to you within 24 hours.
+            </p>
+          )}
+          {status === "error" && (
+            <p role="alert" className="font-heading text-xs text-red-400 tracking-wider">
+              Something went wrong. Email me directly at ankitpatel79600@gmail.com
             </p>
           )}
         </motion.form>

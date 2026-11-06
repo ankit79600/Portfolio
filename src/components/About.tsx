@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Briefcase, Code2 } from "lucide-react";
+import { MapPin, Mail, Briefcase, Code2, Download } from "lucide-react";
 
 const info = [
   { icon: MapPin, label: "Location", value: "India" },
@@ -49,7 +49,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {info.map(({ icon: Icon, label, value }) => (
               <div
                 key={label}
@@ -66,6 +66,20 @@ export default function About() {
               </div>
             ))}
           </div>
+
+          {/* Resume download */}
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center gap-2.5 font-heading text-xs tracking-widest
+              px-6 py-3.5 border border-accent/30 text-accent rounded-xl
+              hover:bg-accent hover:text-background hover:border-accent
+              hover:shadow-[0_0_30px_rgba(0,230,118,0.3)]
+              transition-all duration-200 cursor-pointer"
+          >
+            <Download size={14} />
+            DOWNLOAD RESUME
+          </a>
         </motion.div>
 
         {/* Right — visual bento */}

@@ -28,10 +28,12 @@ function MagneticButton({
   children,
   href,
   variant = "primary",
+  download,
 }: {
   children: React.ReactNode;
   href: string;
   variant?: "primary" | "outline";
+  download?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -57,6 +59,7 @@ function MagneticButton({
     >
       <a
         href={href}
+        download={download}
         className={
           variant === "primary"
             ? `relative group flex items-center gap-2 font-heading text-xs tracking-widest
@@ -168,6 +171,9 @@ export default function Hero() {
             </MagneticButton>
             <MagneticButton href="#contact" variant="outline">
               GET IN TOUCH
+            </MagneticButton>
+            <MagneticButton href="/resume.pdf" variant="outline" download>
+              RESUME ↓
             </MagneticButton>
           </motion.div>
 

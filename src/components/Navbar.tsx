@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,9 +10,12 @@ const links = [
   { label: "Contact", href: "#contact" },
 ];
 
+const SECTIONS = ["hero", "about", "projects", "skills", "contact"];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -20,9 +23,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    SECTIONS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
     <>
-      {/* Desktop nav — floating pill */}
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-6 pointer-events-none">
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
@@ -51,19 +68,26 @@ export default function Navbar() {
 
             {/* Desktop links */}
             <ul className="hidden md:flex items-center gap-7">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="font-heading text-xs tracking-widest text-fg-muted hover:text-white
-                      transition-colors duration-200 cursor-pointer relative group"
-                  >
-                    {link.label.toUpperCase()}
-                    <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent
-                      group-hover:w-full transition-all duration-300 ease-out" />
-                  </a>
-                </li>
-              ))}
+              {links.map((link) => {
+                const isActive = activeSection === link.href.slice(1);
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className={`font-heading text-xs tracking-widest transition-colors duration-200 cursor-pointer relative group ${
+                        isActive ? "text-white" : "text-fg-muted hover:text-white"
+                      }`}
+                    >
+                      {link.label.toUpperCase()}
+                      <span
+                        className={`absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300 ease-out ${
+                          isActive ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                      />
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
 
             {/* CTA + mobile burger */}
@@ -107,8 +131,9 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="font-heading text-sm tracking-widest text-fg-muted hover:text-accent
-                      transition-colors cursor-pointer"
+                    className={`font-heading text-sm tracking-widest transition-colors cursor-pointer ${
+                      activeSection === link.href.slice(1) ? "text-accent" : "text-fg-muted hover:text-accent"
+                    }`}
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.label.toUpperCase()}
