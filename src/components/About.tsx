@@ -123,14 +123,14 @@ export default function About() {
               {/* Accent border */}
               <div className="absolute -inset-[2px] rounded-full border border-accent/40" />
               {/* Photo */}
-              <div className="relative w-44 h-44 rounded-full overflow-hidden">
+              <div className="relative w-52 h-52 rounded-full overflow-hidden">
                 <Image
                   src="/avatar.png"
                   alt="Ankit Patel"
                   fill
                   priority
-                  className="object-cover object-top"
-                  style={{ objectPosition: "center 10%" }}
+                  className="object-cover"
+                  style={{ objectPosition: "50% 30%" }}
                 />
               </div>
             </div>
