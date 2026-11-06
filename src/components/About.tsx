@@ -4,7 +4,7 @@ import { MapPin, Mail, Briefcase, Code2 } from "lucide-react";
 
 const info = [
   { icon: MapPin, label: "Location", value: "India" },
-  { icon: Mail, label: "Email", value: "udemygenalpha@gmail.com" },
+  { icon: Mail, label: "Email", value: "ankitpatel79600@gmail.com" },
   { icon: Briefcase, label: "Status", value: "Open to work" },
   { icon: Code2, label: "Focus", value: "Full-Stack + UI/UX" },
 ];

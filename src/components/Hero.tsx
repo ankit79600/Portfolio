@@ -21,7 +21,7 @@ const socials = [
   { icon: Github, href: "https://github.com/ankit79600", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/ankitpatel79600/", label: "LinkedIn" },
   { icon: Twitter, href: "https://x.com/ankit_pate33282", label: "Twitter" },
-  { icon: Mail, href: "mailto:udemygenalpha@gmail.com", label: "Email" },
+  { icon: Mail, href: "mailto:ankitpatel79600@gmail.com", label: "Email" },
 ];
 
 function MagneticButton({

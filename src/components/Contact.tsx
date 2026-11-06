@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, Send, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 
 const socials = [
-  { icon: Mail, label: "Email", value: "udemygenalpha@gmail.com", href: "mailto:udemygenalpha@gmail.com" },
+  { icon: Mail, label: "Email", value: "ankitpatel79600@gmail.com", href: "mailto:ankitpatel79600@gmail.com" },
   { icon: Github, label: "GitHub", value: "github.com/ankit79600", href: "https://github.com/ankit79600" },
   { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/ankitpatel79600", href: "https://www.linkedin.com/in/ankitpatel79600/" },
   { icon: Twitter, label: "Twitter / X", value: "x.com/ankit_pate33282", href: "https://x.com/ankit_pate33282" },
