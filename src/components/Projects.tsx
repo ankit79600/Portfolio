@@ -42,20 +42,20 @@ const projects = [
   },
   {
     num: "05",
-    title: "Alumni Connect Hub",
+    title: "Credit Scoring dApp",
     description:
-      "Student-alumni networking platform with Google OAuth and Supabase backend. Alumni post jobs, internships, and events; students discover mentors via a Google Maps-powered global alumni directory.",
-    tags: ["React", "TypeScript", "Supabase", "Tailwind CSS", "Google OAuth"],
-    github: "https://github.com/ankit79600/alumni-connect-hub",
+      "Permissionless credit-scoring platform on the Stellar blockchain — any wallet can rate another (0–1000) and scores are averaged on-chain. Features a multi-evaluator trust model, PostHog/Sentry monitoring, and ~5s finality at under $0.01 per transaction.",
+    tags: ["Next.js", "TypeScript", "Stellar", "Rust", "Soroban", "Vercel"],
+    github: "https://github.com/ankit79600/My-Credit-Scoring",
     live: null,
   },
   {
     num: "06",
-    title: "Quizchain",
+    title: "Saathi",
     description:
-      "On-chain quiz system deployed on Celo Sepolia testnet. Smart contract stores and verifies quiz answers immutably on-chain, with transactions confirmed in under one second and fully auditable on Celo Blockscout.",
-    tags: ["Solidity", "Celo", "Smart Contracts", "Remix IDE", "MetaMask"],
-    github: "https://github.com/ankit79600/Quizchain",
+      "Fully offline, on-device AI health triage assistant for rural health workers. Combines vision, voice input, and structured form-filling using the Gemma model via LiteRT-LM — all processing stays local with zero internet dependency.",
+    tags: ["Python", "Gemma", "LiteRT-LM", "Streamlit", "On-device AI"],
+    github: "https://github.com/ankit79600/Saathi",
     live: null,
   },
 ];

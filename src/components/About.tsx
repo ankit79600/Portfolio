@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, Mail, Briefcase, Code2, Download } from "lucide-react";
 
 const info = [
-  { icon: MapPin, label: "Location", value: "India" },
+  { icon: MapPin, label: "Location", value: "Kolkata, India" },
   { icon: Mail, label: "Email", value: "ankitpatel79600@gmail.com" },
   { icon: Briefcase, label: "Status", value: "Open to work" },
   { icon: Code2, label: "Focus", value: "Full-Stack + UI/UX" },
@@ -33,19 +33,22 @@ export default function About() {
 
           <div className="space-y-5 font-body text-fg-muted leading-relaxed mb-10">
             <p>
-              I&apos;m a full-stack developer based in India, passionate about
-              building products that live on the internet. I enjoy turning
-              complex problems into simple, beautiful, and intuitive designs.
+              I&apos;m a first-year Computer Science undergraduate at Narula
+              Institute of Technology, Kolkata, and a self-driven full-stack
+              developer. I enjoy building products that are fast, purposeful,
+              and span the full stack — from polished UIs to on-chain smart
+              contracts.
             </p>
             <p>
-              When I&apos;m not pushing code, I&apos;m exploring new technologies,
-              contributing to open source, or levelling up through side
-              projects. I care deeply about developer experience and clean
-              architecture.
+              My work ranges from real-time healthcare queues and AI-powered
+              prediction platforms to zero-knowledge proof systems on the
+              Midnight blockchain. I move fast, pick up new stacks quickly,
+              and care deeply about shipping things that actually work.
             </p>
             <p>
-              Currently looking for opportunities where I can contribute, grow,
-              and continue to push what&apos;s possible on the web.
+              Currently looking for a software development internship or
+              entry-level role where I can contribute, grow, and keep pushing
+              what&apos;s possible on the web.
             </p>
           </div>
 
