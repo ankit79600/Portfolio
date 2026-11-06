@@ -96,49 +96,62 @@ export default function About() {
         >
           {/* Avatar card */}
           <div
-            className="col-span-2 relative overflow-hidden rounded-2xl border border-white/[0.06]"
-            style={{ minHeight: 360 }}
+            className="col-span-2 bg-[#0A0A0A] border border-white/[0.06] rounded-2xl
+              flex flex-col items-center justify-center gap-4 relative overflow-hidden py-10"
           >
-            <Image
-              src="/avatar.png"
-              alt="Ankit Patel"
-              fill
-              priority
-              className="object-cover object-top"
-            />
-            {/* Green arc glow matching the portfolio accent */}
+            {/* Background radial glow */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(ellipse at 65% 15%, rgba(0,230,118,0.13) 0%, transparent 55%)",
-                mixBlendMode: "overlay",
+                  "radial-gradient(circle at 50% 50%, rgba(0,230,118,0.07) 0%, transparent 65%)",
               }}
             />
-            {/* Bottom fade into card */}
-            <div
-              className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 60%, transparent 100%)",
-              }}
-            />
-            {/* Floating name tag */}
-            <div className="absolute bottom-5 left-5 z-10">
-              <p className="font-display font-bold text-white text-xl leading-tight">
+
+            {/* Circular avatar */}
+            <div className="relative z-10">
+              {/* Outer glow ring */}
+              <div
+                className="absolute -inset-[3px] rounded-full"
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, #00E676, transparent, #00E676, transparent, #00E676)",
+                  opacity: 0.5,
+                  filter: "blur(4px)",
+                }}
+              />
+              {/* Accent border */}
+              <div className="absolute -inset-[2px] rounded-full border border-accent/40" />
+              {/* Photo */}
+              <div className="relative w-44 h-44 rounded-full overflow-hidden">
+                <Image
+                  src="/avatar.png"
+                  alt="Ankit Patel"
+                  fill
+                  priority
+                  className="object-cover object-top"
+                  style={{ objectPosition: "center 10%" }}
+                />
+              </div>
+            </div>
+
+            {/* Name + role below */}
+            <div className="relative z-10 text-center">
+              <p className="font-display font-bold text-white text-lg leading-tight">
                 Ankit Patel
               </p>
-              <p className="font-heading text-[10px] tracking-[0.3em] text-accent mt-1">
+              <p className="font-heading text-[10px] tracking-[0.35em] text-accent mt-1">
                 FULL-STACK DEVELOPER
               </p>
             </div>
-            {/* Top-right status dot */}
-            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1.5">
+
+            {/* Available badge */}
+            <div className="relative z-10 flex items-center gap-1.5 border border-accent/20 rounded-full px-3 py-1.5 bg-accent/[0.05]">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
               </span>
-              <span className="font-heading text-[9px] tracking-widest text-accent">AVAILABLE</span>
+              <span className="font-heading text-[9px] tracking-widest text-accent">AVAILABLE FOR WORK</span>
             </div>
           </div>
 
