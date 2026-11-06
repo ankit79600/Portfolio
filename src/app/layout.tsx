@@ -6,6 +6,7 @@ import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ankitpatel-git-main-code-bits.vercel.app"),
   title: "Ankit Patel — Full-Stack Developer",
   description:
     "Full-stack developer based in India, building fast, clean, and accessible digital experiences with React, Next.js, and Node.js.",
