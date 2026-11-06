@@ -1,149 +1,224 @@
 "use client";
-import { ArrowDown, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { useRef } from "react";
+import { Github, Linkedin, Twitter, Mail, ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import dynamic from "next/dynamic";
 
-const ParticleCanvas = dynamic(() => import("./ParticleCanvas"), { ssr: false });
+const Scene3D = dynamic(() => import("./Scene3D"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full" />,
+});
 
 const ROLES = [
   "Full-Stack Developer",
-  "UI/UX Enthusiast",
+  "UI/UX Engineer",
   "Open Source Contributor",
   "Problem Solver",
 ];
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
-});
+const socials = [
+  { icon: Github, href: "https://github.com/ankit79600", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/ankitpatel79600/", label: "LinkedIn" },
+  { icon: Twitter, href: "https://x.com/ankit_pate33282", label: "Twitter" },
+  { icon: Mail, href: "mailto:udemygenalpha@gmail.com", label: "Email" },
+];
+
+function MagneticButton({
+  children,
+  href,
+  variant = "primary",
+}: {
+  children: React.ReactNode;
+  href: string;
+  variant?: "primary" | "outline";
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.28;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.28;
+    el.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  const onMouseLeave = () => {
+    if (ref.current) ref.current.style.transform = "translate(0,0)";
+  };
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ transition: "transform 0.5s cubic-bezier(0.23,1,0.32,1)" }}
+    >
+      <a
+        href={href}
+        className={
+          variant === "primary"
+            ? `relative group flex items-center gap-2 font-heading text-xs tracking-widest
+               px-7 py-4 bg-accent text-background font-bold rounded-xl overflow-hidden
+               hover:shadow-[0_0_40px_rgba(0,230,118,0.4)] transition-shadow duration-300 cursor-pointer`
+            : `flex items-center gap-2 font-heading text-xs tracking-widest
+               px-7 py-4 border border-white/[0.1] text-fg-secondary rounded-xl
+               hover:border-white/20 hover:text-white
+               hover:shadow-[0_0_20px_rgba(255,255,255,0.03)]
+               transition-all duration-300 cursor-pointer`
+        }
+      >
+        {variant === "primary" && (
+          <div className="absolute inset-0 bg-accent-dark translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+        )}
+        <span className="relative z-10">{children}</span>
+      </a>
+    </div>
+  );
+}
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export default function Hero() {
-  const role = useTypewriter(ROLES);
+  const role = useTypewriter(ROLES, 70, 35, 2200);
 
   return (
     <section
       id="hero"
-      className="relative min-h-dvh flex flex-col justify-center overflow-hidden"
+      className="relative min-h-dvh flex items-center overflow-hidden"
     >
-      {/* 3D particle background */}
-      <div className="absolute inset-0 opacity-55">
-        <ParticleCanvas />
-      </div>
-
-      {/* Radial glow behind content */}
+      {/* Subtle radial glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34,197,94,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse 100% 80% at 70% 50%, rgba(0,230,118,0.04) 0%, transparent 65%)",
         }}
       />
 
-      {/* Grid overlay */}
+      {/* Faint grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
         style={{
           backgroundImage:
-            "linear-gradient(#22C55E 1px, transparent 1px), linear-gradient(90deg, #22C55E 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+            "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-20 pb-10">
-        <motion.p
-          {...fadeUp(0.1)}
-          className="font-heading text-accent text-sm tracking-[0.3em] mb-5 flex items-center gap-2"
-        >
-          <span className="inline-block w-2 h-2 rounded-full bg-accent animate-pulse" />
-          AVAILABLE FOR WORK
-        </motion.p>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-16
+        grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-12 items-center">
 
-        <motion.h1
-          {...fadeUp(0.25)}
-          className="font-heading font-bold text-foreground leading-[1.05] mb-4"
-          style={{ fontSize: "clamp(3rem, 10vw, 7rem)" }}
+        {/* ── Left: Text ── */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col"
         >
-          I&apos;m{" "}
-          <span
-            className="text-accent"
-            style={{
-              textShadow:
-                "0 0 40px rgba(34,197,94,0.45), 0 0 80px rgba(34,197,94,0.2)",
-            }}
+          {/* Status badge */}
+          <motion.div variants={item} className="flex items-center gap-2.5 mb-10">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-50" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+            </span>
+            <span className="font-heading text-xs tracking-[0.3em] text-accent">
+              AVAILABLE FOR WORK
+            </span>
+          </motion.div>
+
+          {/* Name — huge display type */}
+          <motion.div variants={item} className="mb-6">
+            <h1 className="font-display font-bold leading-[0.92] tracking-[-0.03em]"
+              style={{ fontSize: "clamp(4.5rem, 13vw, 11rem)" }}>
+              <span className="block text-white">ANKIT</span>
+              <span className="block text-stroke">PATEL</span>
+            </h1>
+          </motion.div>
+
+          {/* Typewriter role */}
+          <motion.div variants={item} className="mb-10 h-8 flex items-center">
+            <span className="font-body text-lg text-fg-muted">
+              {role}
+              <span className="text-accent ml-0.5 animate-pulse">|</span>
+            </span>
+          </motion.div>
+
+          {/* Bio */}
+          <motion.p
+            variants={item}
+            className="font-body text-base text-fg-muted leading-relaxed max-w-md mb-12"
           >
-            Ankit
-          </span>
-          <br />
-          Patel
-          <span className="text-accent" style={{ textShadow: "0 0 20px rgba(34,197,94,0.6)" }}>.</span>
-        </motion.h1>
+            I build end-to-end web products with a sharp focus on
+            performance and experience. Based in India, open to global opportunities.
+          </motion.p>
 
-        {/* Typewriter role */}
-        <motion.div {...fadeUp(0.4)} className="mb-6 h-10 flex items-center">
-          <span className="font-heading text-xl md:text-2xl text-muted-foreground">
-            {role}
-            <span className="text-accent animate-pulse">|</span>
-          </span>
+          {/* CTA buttons */}
+          <motion.div variants={item} className="flex flex-wrap gap-4 mb-12">
+            <MagneticButton href="#projects" variant="primary">
+              VIEW WORK ↗
+            </MagneticButton>
+            <MagneticButton href="#contact" variant="outline">
+              GET IN TOUCH
+            </MagneticButton>
+          </motion.div>
+
+          {/* Social links */}
+          <motion.div variants={item} className="flex items-center gap-4">
+            <span className="font-heading text-xs tracking-widest text-fg-dim">FIND ME</span>
+            <div className="h-px w-8 bg-fg-dim" />
+            {socials.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="w-9 h-9 flex items-center justify-center rounded-lg border border-white/[0.07]
+                  text-fg-muted hover:text-accent hover:border-accent/30
+                  hover:shadow-[0_0_16px_rgba(0,230,118,0.2)]
+                  transition-all duration-200 cursor-pointer"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
+          </motion.div>
         </motion.div>
 
-        <motion.p
-          {...fadeUp(0.5)}
-          className="font-body text-base text-muted-foreground max-w-lg leading-relaxed mb-10"
+        {/* ── Right: 3D Scene ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-[380px] lg:h-[520px] w-full"
         >
-          I build end-to-end web applications with a sharp eye for performance
-          and great UX. Currently open to freelance and full-time roles.
-        </motion.p>
-
-        <motion.div {...fadeUp(0.6)} className="flex flex-wrap gap-4 mb-12">
-          <a
-            href="#projects"
-            className="group relative font-heading text-sm px-7 py-3 bg-accent text-background font-semibold rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,197,94,0.5)]"
-          >
-            <span className="relative z-10">View Projects</span>
-            <div className="absolute inset-0 bg-accent-dark translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </a>
-          <a
-            href="#contact"
-            className="font-heading text-sm px-7 py-3 border border-border text-foreground rounded-lg cursor-pointer transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-[0_0_20px_rgba(34,197,94,0.15)]"
-          >
-            Get In Touch
-          </a>
-        </motion.div>
-
-        <motion.div {...fadeUp(0.7)} className="flex gap-5">
-          {[
-            { icon: Github, href: "https://github.com/ankit79600", label: "GitHub" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/ankitpatel79600/", label: "LinkedIn" },
-            { icon: Twitter, href: "https://x.com/ankit_pate33282", label: "Twitter / X" },
-            { icon: Mail, href: "mailto:udemygenalpha@gmail.com", label: "Email" },
-          ].map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("mailto") ? undefined : "_blank"}
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground cursor-pointer transition-all duration-200 hover:border-accent hover:text-accent hover:shadow-[0_0_15px_rgba(34,197,94,0.3)]"
-            >
-              <Icon size={18} />
-            </a>
-          ))}
+          {/* Glow behind canvas */}
+          <div
+            className="absolute inset-0 rounded-full blur-[80px] pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%)" }}
+          />
+          <Scene3D />
         </motion.div>
       </div>
 
       {/* Scroll cue */}
-      <motion.a
-        href="#about"
-        {...fadeUp(1.0)}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-accent transition-colors cursor-pointer hidden md:flex"
-        aria-label="Scroll down"
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
-        <span className="font-heading text-xs tracking-widest">SCROLL</span>
-        <ArrowDown size={16} className="animate-bounce" />
-      </motion.a>
+        <span className="font-heading text-[10px] tracking-[0.4em] text-fg-dim">SCROLL</span>
+        <ArrowDown size={14} className="text-fg-dim animate-bounce" />
+      </motion.div>
     </section>
   );
 }

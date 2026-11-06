@@ -1,34 +1,37 @@
 "use client";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Briefcase } from "lucide-react";
+import { MapPin, Mail, Briefcase, Code2 } from "lucide-react";
 
 const info = [
   { icon: MapPin, label: "Location", value: "India" },
   { icon: Mail, label: "Email", value: "udemygenalpha@gmail.com" },
   { icon: Briefcase, label: "Status", value: "Open to work" },
+  { icon: Code2, label: "Focus", value: "Full-Stack + UI/UX" },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-28 px-6 max-w-6xl mx-auto">
-      <div className="grid md:grid-cols-2 gap-16 items-center">
-        {/* Text side */}
+    <section id="about" className="py-32 px-6 max-w-7xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-20 items-start">
+
+        {/* Left */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="font-heading text-accent text-xs tracking-[0.3em] mb-3">
+          <span className="font-heading text-xs tracking-[0.4em] text-accent block mb-4">
             01. ABOUT ME
-          </p>
+          </span>
           <h2
-            className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-7"
-            style={{ textShadow: "0 0 60px rgba(34,197,94,0.1)" }}
+            className="font-display font-bold text-white mb-8"
+            style={{ fontSize: "clamp(2.2rem,5vw,4rem)", letterSpacing: "-0.02em", lineHeight: 1 }}
           >
             Who I Am
           </h2>
-          <div className="space-y-4 font-body text-muted-foreground leading-relaxed mb-8">
+
+          <div className="space-y-5 font-body text-fg-muted leading-relaxed mb-10">
             <p>
               I&apos;m a full-stack developer based in India, passionate about
               building products that live on the internet. I enjoy turning
@@ -42,90 +45,88 @@ export default function About() {
             </p>
             <p>
               Currently looking for opportunities where I can contribute, grow,
-              and continue to level up.
+              and continue to push what&apos;s possible on the web.
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {info.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-md bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
-                  <Icon size={14} className="text-accent" />
-                </div>
-                <div className="flex gap-2 items-center">
-                  <span className="font-heading text-xs text-muted-foreground tracking-wider">
-                    {label}:
-                  </span>
-                  <span className="font-body text-sm text-foreground">{value}</span>
+              <div
+                key={label}
+                className="flex items-center gap-3 bg-[#0A0A0A] border border-white/[0.06]
+                  rounded-xl px-4 py-3"
+              >
+                <Icon size={15} className="text-accent shrink-0" />
+                <div>
+                  <p className="font-heading text-[10px] tracking-widest text-fg-dim mb-0.5">
+                    {label.toUpperCase()}
+                  </p>
+                  <p className="font-body text-sm text-fg-secondary">{value}</p>
                 </div>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Avatar / visual side */}
+        {/* Right — visual bento */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="flex justify-center md:justify-end"
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="grid grid-cols-2 gap-3"
         >
-          <div className="relative">
-            {/* Main card */}
+          {/* Avatar card */}
+          <div
+            className="col-span-2 bg-[#0A0A0A] border border-white/[0.06] rounded-2xl
+              p-8 flex items-center justify-center relative overflow-hidden"
+            style={{ minHeight: 200 }}
+          >
             <div
-              className="w-64 h-64 md:w-72 md:h-72 rounded-2xl bg-card border border-border
-                flex items-center justify-center relative overflow-hidden
-                hover:border-accent/30 hover:shadow-[0_0_60px_rgba(34,197,94,0.1)] transition-all duration-500"
-              style={{ transform: "perspective(800px) rotateY(-5deg) rotateX(2deg)" }}
-            >
-              {/* Inner glow */}
-              <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                  background:
-                    "radial-gradient(circle at 50% 50%, rgba(34,197,94,0.15) 0%, transparent 60%)",
-                }}
-              />
-              <div className="relative z-10 text-center">
-                <p
-                  className="font-heading text-7xl font-bold text-accent mb-2"
-                  style={{ textShadow: "0 0 40px rgba(34,197,94,0.6)" }}
-                >
-                  AP
-                </p>
-                <p className="font-heading text-xs text-muted-foreground tracking-widest">
-                  ANKIT PATEL
-                </p>
-              </div>
-            </div>
-
-            {/* Decorative offset border */}
-            <div
-              className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border border-accent/20 -z-10"
-              style={{ transform: "perspective(800px) rotateY(-5deg) rotateX(2deg)" }}
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 50% 50%, rgba(0,230,118,0.06) 0%, transparent 70%)",
+              }}
             />
-
-            {/* Floating badge — experience */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 -right-6 bg-card border border-border rounded-xl px-4 py-2 shadow-xl"
+            <p
+              className="font-display font-bold text-8xl text-accent relative z-10"
+              style={{ textShadow: "0 0 60px rgba(0,230,118,0.5)" }}
             >
-              <p className="font-heading text-xs text-muted-foreground">Experience</p>
-              <p className="font-heading text-sm font-bold text-accent">2+ Years</p>
-            </motion.div>
-
-            {/* Floating badge — projects */}
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-4 -left-6 bg-card border border-border rounded-xl px-4 py-2 shadow-xl"
-            >
-              <p className="font-heading text-xs text-muted-foreground">Projects</p>
-              <p className="font-heading text-sm font-bold text-accent">15+ Shipped</p>
-            </motion.div>
+              AP
+            </p>
           </div>
+
+          {/* Stat cards */}
+          {[
+            { value: "2+", label: "Years\nCoding" },
+            { value: "15+", label: "Projects\nShipped" },
+          ].map(({ value, label }) => (
+            <motion.div
+              key={label}
+              animate={{ y: [0, -6, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: label.includes("Years") ? 0 : 0.8,
+              }}
+              className="bg-[#0A0A0A] border border-white/[0.06] rounded-2xl p-6
+                flex flex-col items-center justify-center text-center
+                hover:border-accent/20 hover:shadow-[0_0_30px_rgba(0,230,118,0.05)]
+                transition-all duration-300"
+            >
+              <p
+                className="font-display font-bold text-4xl text-accent mb-1"
+                style={{ textShadow: "0 0 20px rgba(0,230,118,0.4)" }}
+              >
+                {value}
+              </p>
+              <p className="font-heading text-[10px] tracking-widest text-fg-dim whitespace-pre-line">
+                {label.toUpperCase()}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

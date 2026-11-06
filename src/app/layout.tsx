@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "Ankit Patel — Developer",
-  description: "Full-stack developer portfolio — projects, skills, and contact.",
+  title: "Ankit Patel — Full-Stack Developer",
+  description: "Portfolio of Ankit Patel — full-stack developer building fast, clean, and accessible digital experiences.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
